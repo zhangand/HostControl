@@ -13,13 +13,15 @@ using System.IO;
 
 namespace ChatClient
 {
-    public partial class FClient : Form
+    public partial class FTClient : Form
     {
-        public FClient()
+        public FTClient()
         {
             InitializeComponent();
             //关闭对文本框的非法线程操作检查
             TextBox.CheckForIllegalCrossThreadCalls = false;
+            btnDisConnectToServer.Enabled = false;
+            btnCSend.Enabled = false;
         }
         //创建 1个客户端套接字 和1个负责监听服务端请求的线程  
         Socket socketClient = null;
@@ -37,19 +39,37 @@ namespace ChatClient
             IPAddress serverIPAddress = IPAddress.Parse(txtIP.Text.Trim());
             int serverPort = int.Parse(txtPort.Text.Trim());
             IPEndPoint endpoint = new IPEndPoint(serverIPAddress, serverPort);
-            //向指定的ip和端口号的服务端发送连接请求 用的方法是Connect 不是Bind
-            socketClient.Connect(endpoint);
-            //创建一个新线程 用于监听服务端发来的信息
-            threadClient = new Thread(RecMsg);
-            //将窗体线程设置为与后台同步
-            threadClient.IsBackground = true;
-            //启动线程
-            threadClient.Start();
-            txtMsg.AppendText("已与服务端建立连接,可以开始通信...\r\n");
-            btnConnectToServer.Enabled = false;
+            try
+            {
+                //向指定的ip和端口号的服务端发送连接请求 用的方法是Connect 不是Bind
+                socketClient.Connect(endpoint);
+                //创建一个新线程 用于监听服务端发来的信息
+                threadClient = new Thread(RecMsg);
+                //将窗体线程设置为与后台同步
+                threadClient.IsBackground = true;
+                //启动线程
+                threadClient.Start();
+                txtMsg.AppendText("Connected server, start communication...\r\n");
+                btnConnectToServer.Enabled = false;
+                btnDisConnectToServer.Enabled = true;
+                btnCSend.Enabled = true;
+
+            }
+            catch (SocketException ex)
+            {
+                txtMsg.AppendText("Socker error message:" + ex.Message + "\r\n");
+            }
         }
 
-
+        private void btnDisConnectToServer_Click(object sender, EventArgs e)
+        {
+            //定义一个套字节监听  包含3个参数(IP4寻址协议,流式连接,TCP协议)
+            btnConnectToServer.Enabled = true;
+            btnDisConnectToServer.Enabled = false;
+            btnCSend.Enabled = false;
+            txtMsg.AppendText("Disconnected server...\r\n");
+            socketClient.Close();
+        }
         /// <summary>
         /// 接受服务端发来信息的方法
         /// </summary>
@@ -67,20 +87,27 @@ namespace ChatClient
                 }
                 catch (SocketException ex)
                 {
-                    txtMsg.AppendText("套接字异常消息:" + ex.Message + "\r\n");
-                    txtMsg.AppendText("服务端已断开连接\r\n");
+                    if (btnDisConnectToServer.Enabled==true)
+                    {
+                        btnConnectToServer.Enabled = true;
+                        btnDisConnectToServer.Enabled = false;
+                        btnCSend.Enabled = false;
+                        txtMsg.AppendText("Socker error message:" + ex.Message + "\r\n");
+                        txtMsg.AppendText("Server disconnect...\r\n");
+                        break;
+                    }
                     break;
                 }
                 catch (Exception ex)
                 {
-                    txtMsg.AppendText("系统异常消息: " + ex.Message + "\r\n");
+                    txtMsg.AppendText("System error message: " + ex.Message + "\r\n");
                     break;
                 }
                 //将套接字获取到的字节数组转换为人可以看懂的字符串
                 strRecMsg = Encoding.UTF8.GetString(buffer, 0, length);
 
                 //将文本框输入的信息附加到txtMsg中  并显示 谁,什么时间,换行,发送了什么信息 再换行
-                txtMsg.AppendText("服务端在 " + GetCurrentTime() + " 给您发送了:\r\n" + strRecMsg + "\r\n");
+                txtMsg.AppendText("Server " + GetCurrentTime() + " send:\r\n" + strRecMsg + "\r\n");
             }
         }
 
@@ -96,7 +123,7 @@ namespace ChatClient
             Buffer.BlockCopy(arrClientMsg, 0, arrClientSendMsg, 1, arrClientMsg.Length);
 
             socketClient.Send(arrClientSendMsg);
-            txtMsg.AppendText("SoFlash:" + GetCurrentTime() + "\r\n" + sendMsg + "\r\n");
+            txtMsg.AppendText("Client:" + GetCurrentTime() + "\r\n" + sendMsg + "\r\n");
         }
 
         //向服务端发送信息
@@ -115,8 +142,6 @@ namespace ChatClient
             }
         }
 
-
-
         /// <summary>
         /// 获取当前系统时间
         /// </summary>
@@ -127,10 +152,19 @@ namespace ChatClient
             return currentTime;
         }
 
-        //关闭客户端
-        private void btnExit_Click(object sender, EventArgs e)
+        private void AllOn_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            for (int i = 0; i < listBox1.Items.Count; i++)
+            {listBox1.SetSelected(i, true);
+            //txtMsg.AppendText(listBox1.Items[i] +" Selected"+ "\r\n");
+            }
         }
+
+        private void AllOff_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < listBox1.Items.Count; i++)
+                listBox1.SetSelected(i, false);
+        }
+
     }
 }

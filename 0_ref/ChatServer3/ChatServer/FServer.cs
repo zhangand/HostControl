@@ -169,9 +169,9 @@ namespace ChatServer
 
                     if (firstReceived > 0) //接受到的长度大于0 说明有信息或文件传来
                     {
-                        if (buffer[0] == 0) //0为文字信息
+                        if  ((buffer[0] != 1) |  (buffer[0] != 2 ) ) //0为文字信息
                         {
-                            strSRecMsg = Encoding.UTF8.GetString(buffer, 1, firstReceived - 1);//真实有用的文本信息要比接收到的少1(标识符)
+                            strSRecMsg = Encoding.UTF8.GetString(buffer, 0, firstReceived);//真实有用的文本信息要比接收到的少1(标识符)
                             txtMsg.AppendText("SoFlash:" + GetCurrentTime() + "\r\n" + strSRecMsg + "\r\n");
                         }
                         if (buffer[0] == 2)//2为文件名字和长度

@@ -50,28 +50,25 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(352, 47);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(224, 38);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(68, 17);
+            this.label3.Size = new System.Drawing.Size(58, 13);
             this.label3.TabIndex = 23;
             this.label3.Text = "聊天内容:";
             // 
             // txtSendMsg
             // 
-            this.txtSendMsg.Location = new System.Drawing.Point(177, 396);
-            this.txtSendMsg.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtSendMsg.Location = new System.Drawing.Point(133, 322);
             this.txtSendMsg.Name = "txtSendMsg";
-            this.txtSendMsg.Size = new System.Drawing.Size(405, 22);
+            this.txtSendMsg.Size = new System.Drawing.Size(305, 20);
             this.txtSendMsg.TabIndex = 22;
             this.txtSendMsg.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSendMsg_KeyDown);
             // 
             // btnSendMsg
             // 
-            this.btnSendMsg.Location = new System.Drawing.Point(605, 390);
-            this.btnSendMsg.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnSendMsg.Location = new System.Drawing.Point(454, 317);
             this.btnSendMsg.Name = "btnSendMsg";
-            this.btnSendMsg.Size = new System.Drawing.Size(100, 31);
+            this.btnSendMsg.Size = new System.Drawing.Size(75, 25);
             this.btnSendMsg.TabIndex = 21;
             this.btnSendMsg.Text = "发送信息";
             this.btnSendMsg.UseVisualStyleBackColor = true;
@@ -79,20 +76,18 @@
             // 
             // txtMsg
             // 
-            this.txtMsg.Location = new System.Drawing.Point(355, 79);
-            this.txtMsg.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.txtMsg.Location = new System.Drawing.Point(227, 65);
             this.txtMsg.Multiline = true;
             this.txtMsg.Name = "txtMsg";
             this.txtMsg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMsg.Size = new System.Drawing.Size(350, 290);
+            this.txtMsg.Size = new System.Drawing.Size(302, 237);
             this.txtMsg.TabIndex = 19;
             // 
             // btnStartService
             // 
-            this.btnStartService.Location = new System.Drawing.Point(80, 341);
-            this.btnStartService.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnStartService.Location = new System.Drawing.Point(59, 277);
             this.btnStartService.Name = "btnStartService";
-            this.btnStartService.Size = new System.Drawing.Size(91, 31);
+            this.btnStartService.Size = new System.Drawing.Size(68, 25);
             this.btnStartService.TabIndex = 15;
             this.btnStartService.Text = "启动服务";
             this.btnStartService.UseVisualStyleBackColor = true;
@@ -101,20 +96,17 @@
             // lstClients
             // 
             this.lstClients.FormattingEnabled = true;
-            this.lstClients.ItemHeight = 16;
-            this.lstClients.Location = new System.Drawing.Point(5, 38);
-            this.lstClients.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lstClients.Location = new System.Drawing.Point(4, 31);
             this.lstClients.Name = "lstClients";
-            this.lstClients.Size = new System.Drawing.Size(236, 148);
+            this.lstClients.Size = new System.Drawing.Size(142, 121);
             this.lstClients.TabIndex = 24;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(83, 400);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(62, 325);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 17);
+            this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 26;
             this.label4.Text = "服务端:";
             // 
@@ -122,18 +114,16 @@
             // 
             this.lblIP.AutoSize = true;
             this.lblIP.ForeColor = System.Drawing.Color.Red;
-            this.lblIP.Location = new System.Drawing.Point(47, 20);
-            this.lblIP.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblIP.Location = new System.Drawing.Point(35, 16);
             this.lblIP.Name = "lblIP";
-            this.lblIP.Size = new System.Drawing.Size(0, 17);
+            this.lblIP.Size = new System.Drawing.Size(0, 13);
             this.lblIP.TabIndex = 27;
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(224, 341);
-            this.btnExit.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnExit.Location = new System.Drawing.Point(139, 277);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(92, 28);
+            this.btnExit.Size = new System.Drawing.Size(69, 23);
             this.btnExit.TabIndex = 29;
             this.btnExit.Text = "退出服务";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -142,20 +132,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(8, 48);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(6, 39);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 17);
+            this.label2.Size = new System.Drawing.Size(29, 13);
             this.label2.TabIndex = 16;
             this.label2.Text = "Port:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 20);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(6, 16);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(24, 17);
+            this.label1.Size = new System.Drawing.Size(20, 13);
             this.label1.TabIndex = 17;
             this.label1.Text = "IP:";
             // 
@@ -165,11 +153,9 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lblIP);
-            this.groupBox1.Location = new System.Drawing.Point(75, 47);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Location = new System.Drawing.Point(56, 38);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox1.Size = new System.Drawing.Size(249, 80);
+            this.groupBox1.Size = new System.Drawing.Size(152, 65);
             this.groupBox1.TabIndex = 30;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "服务端";
@@ -178,31 +164,27 @@
             // 
             this.lblPort.AutoSize = true;
             this.lblPort.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.lblPort.Location = new System.Drawing.Point(55, 48);
-            this.lblPort.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblPort.Location = new System.Drawing.Point(41, 39);
             this.lblPort.Name = "lblPort";
-            this.lblPort.Size = new System.Drawing.Size(0, 17);
+            this.lblPort.Size = new System.Drawing.Size(0, 13);
             this.lblPort.TabIndex = 28;
             // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.btnClearSelectedState);
             this.groupBox2.Controls.Add(this.lstClients);
-            this.groupBox2.Location = new System.Drawing.Point(75, 134);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Location = new System.Drawing.Point(56, 109);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.groupBox2.Size = new System.Drawing.Size(249, 199);
+            this.groupBox2.Size = new System.Drawing.Size(152, 162);
             this.groupBox2.TabIndex = 31;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "客户端列表";
             // 
             // btnClearSelectedState
             // 
-            this.btnClearSelectedState.Location = new System.Drawing.Point(149, 0);
-            this.btnClearSelectedState.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnClearSelectedState.Location = new System.Drawing.Point(77, -1);
             this.btnClearSelectedState.Name = "btnClearSelectedState";
-            this.btnClearSelectedState.Size = new System.Drawing.Size(92, 26);
+            this.btnClearSelectedState.Size = new System.Drawing.Size(69, 21);
             this.btnClearSelectedState.TabIndex = 25;
             this.btnClearSelectedState.Text = "取消选择";
             this.btnClearSelectedState.UseVisualStyleBackColor = true;
@@ -210,9 +192,9 @@
             // 
             // FServer
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(780, 473);
+            this.ClientSize = new System.Drawing.Size(585, 384);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnExit);
@@ -222,7 +204,6 @@
             this.Controls.Add(this.btnSendMsg);
             this.Controls.Add(this.txtMsg);
             this.Controls.Add(this.btnStartService);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FServer";
             this.Text = "服务端";
             this.groupBox1.ResumeLayout(false);

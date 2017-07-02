@@ -21,7 +21,11 @@ namespace ChatClient
             //关闭对文本框的非法线程操作检查
             TextBox.CheckForIllegalCrossThreadCalls = false;
             btnDisConnectToServer.Enabled = false;
+            gbxSiteSelect.Enabled = false;
+            gbxCommand.Enabled = false;
+            txtCMsg.Enabled = false;
             btnCSend.Enabled = false;
+            btnAutoRun.Enabled = false;
         }
         //创建 1个客户端套接字 和1个负责监听服务端请求的线程  
         Socket socketClient = null;
@@ -34,7 +38,7 @@ namespace ChatClient
         {
             //定义一个套字节监听  包含3个参数(IP4寻址协议,流式连接,TCP协议)
             socketClient = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
+            
             //获取文本框输入的服务端IP和Port
             IPAddress serverIPAddress = IPAddress.Parse(txtIP.Text.Trim());
             int serverPort = int.Parse(txtPort.Text.Trim());
@@ -43,6 +47,7 @@ namespace ChatClient
             {
                 //向指定的ip和端口号的服务端发送连接请求 用的方法是Connect 不是Bind
                 socketClient.Connect(endpoint);
+ 
                 //创建一个新线程 用于监听服务端发来的信息
                 threadClient = new Thread(RecMsg);
                 //将窗体线程设置为与后台同步
@@ -52,21 +57,27 @@ namespace ChatClient
                 txtMsg.AppendText("Connected server, start communication...\r\n");
                 btnConnectToServer.Enabled = false;
                 btnDisConnectToServer.Enabled = true;
+                gbxSiteSelect.Enabled = true;   
+                txtCMsg.Enabled = true;
                 btnCSend.Enabled = true;
-
+             
             }
             catch (SocketException ex)
             {
                 txtMsg.AppendText("Socker error message:" + ex.Message + "\r\n");
             }
         }
-
+  
         private void btnDisConnectToServer_Click(object sender, EventArgs e)
         {
             //定义一个套字节监听  包含3个参数(IP4寻址协议,流式连接,TCP协议)
             btnConnectToServer.Enabled = true;
             btnDisConnectToServer.Enabled = false;
+            gbxSiteSelect.Enabled = false;
+            gbxCommand.Enabled = false;
+            txtCMsg.Enabled = false;
             btnCSend.Enabled = false;
+            btnAutoRun.Enabled = false;
             txtMsg.AppendText("Disconnected server...\r\n");
             socketClient.Close();
         }
@@ -91,7 +102,11 @@ namespace ChatClient
                     {
                         btnConnectToServer.Enabled = true;
                         btnDisConnectToServer.Enabled = false;
+                        gbxSiteSelect.Enabled = false;
+                        gbxCommand.Enabled = false;
+                        txtCMsg.Enabled = false;
                         btnCSend.Enabled = false;
+                        btnAutoRun.Enabled = false;
                         txtMsg.AppendText("Socker error message:" + ex.Message + "\r\n");
                         txtMsg.AppendText("Server disconnect...\r\n");
                         break;
@@ -117,13 +132,15 @@ namespace ChatClient
         private void ClientSendMsg(string sendMsg, byte symbol)
         {
             byte[] arrClientMsg = Encoding.UTF8.GetBytes(sendMsg);
-            //实际发送的字节数组比实际输入的长度多1 用于存取标识符
-            byte[] arrClientSendMsg = new byte[arrClientMsg.Length + 1];
-            arrClientSendMsg[0] = symbol;  //在索引为0的位置上添加一个标识符
-            Buffer.BlockCopy(arrClientMsg, 0, arrClientSendMsg, 1, arrClientMsg.Length);
-
-            socketClient.Send(arrClientSendMsg);
+            socketClient.Send(arrClientMsg);
             txtMsg.AppendText("Client:" + GetCurrentTime() + "\r\n" + sendMsg + "\r\n");
+
+            ////实际发送的字节数组比实际输入的长度多1 用于存取标识符
+            //byte[] arrClientSendMsg = new byte[arrClientMsg.Length + 1];
+            //arrClientSendMsg[0] = symbol;  //在索引为0的位置上添加一个标识符
+            //Buffer.BlockCopy(arrClientMsg, 0, arrClientSendMsg, 1, arrClientMsg.Length);
+            //socketClient.Send(arrClientSendMsg);
+            //txtMsg.AppendText("Client:" + GetCurrentTime() + "\r\n" + sendMsg + "\r\n");
         }
 
         //向服务端发送信息
@@ -145,11 +162,15 @@ namespace ChatClient
         /// <summary>
         /// 获取当前系统时间
         /// </summary>
-        public DateTime GetCurrentTime()
+        public String GetCurrentTime()
         {
-            DateTime currentTime = new DateTime();
-            currentTime = DateTime.Now;
+            DateTime dt = DateTime.Now;
+            string currentTime = dt.ToString("yyyy-MM-dd HH:mm:ss");
             return currentTime;
+
+            //DateTime currentTime = new DateTime();
+            //currentTime = DateTime.Now;
+            //return currentTime;
         }
 
         private void AllOn_Click(object sender, EventArgs e)
@@ -164,6 +185,30 @@ namespace ChatClient
         {
             for (int i = 0; i < listBox1.Items.Count; i++)
                 listBox1.SetSelected(i, false);
+            gbxCommand.Enabled = false;
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            gbxCommand.Enabled = true;
+        }
+
+        private void ResetBoard_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("reset-board;", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnTestInit_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("testinit;", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnSetVcc_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("testinit;", 0);
+            System.Threading.Thread.Sleep(10);
         }
 
     }

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // 有关程序集的常规信息通过以下
 // 特性集控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("ChatClient")]
+[assembly: AssemblyTitle("FTClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("微软中国")]
-[assembly: AssemblyProduct("ChatClient")]
+[assembly: AssemblyProduct("FTClient")]
 [assembly: AssemblyCopyright("Copyright © 微软中国 2012")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

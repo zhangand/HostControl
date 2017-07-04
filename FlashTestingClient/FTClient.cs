@@ -11,7 +11,7 @@ using System.Threading;
 using System.Net;
 using System.IO;
 
-namespace ChatClient
+namespace FTClient
 {
     public partial class FTClient : Form
     {
@@ -25,7 +25,6 @@ namespace ChatClient
             gbxCommand.Enabled = false;
             txtCMsg.Enabled = false;
             btnCSend.Enabled = false;
-            btnAutoRun.Enabled = false;
         }
         //创建 1个客户端套接字 和1个负责监听服务端请求的线程  
         Socket socketClient = null;
@@ -77,7 +76,6 @@ namespace ChatClient
             gbxCommand.Enabled = false;
             txtCMsg.Enabled = false;
             btnCSend.Enabled = false;
-            btnAutoRun.Enabled = false;
             txtMsg.AppendText("Disconnected server...\r\n");
             socketClient.Close();
         }
@@ -106,7 +104,6 @@ namespace ChatClient
                         gbxCommand.Enabled = false;
                         txtCMsg.Enabled = false;
                         btnCSend.Enabled = false;
-                        btnAutoRun.Enabled = false;
                         txtMsg.AppendText("Socker error message:" + ex.Message + "\r\n");
                         txtMsg.AppendText("Server disconnect...\r\n");
                         break;

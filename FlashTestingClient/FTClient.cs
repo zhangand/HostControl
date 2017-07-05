@@ -32,6 +32,8 @@ namespace FTClient
 
         public const int SendBufferSize = 2 * 1024;
         public const int ReceiveBufferSize = 8 * 1024;
+        public string strRecMsg = null;
+        public long SiteIndex = 0;
 
         private void btnConnectToServer_Click(object sender, EventArgs e)
         {
@@ -82,11 +84,10 @@ namespace FTClient
         /// <summary>
         /// 接受服务端发来信息的方法
         /// </summary>
-        private void RecMsg()
+        public void RecMsg()
         {
             while (true) //持续监听服务端发来的消息
             {
-                string strRecMsg = null;
                 int length = 0;
                 byte[] buffer = new byte[SendBufferSize];
                 try
@@ -172,22 +173,34 @@ namespace FTClient
 
         private void AllOn_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listBox1.Items.Count; i++)
-            {listBox1.SetSelected(i, true);
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                checkedListBox1.SetItemChecked(i, true);
             //txtMsg.AppendText(listBox1.Items[i] +" Selected"+ "\r\n");
             }
+            SiteIndex = 65535;
         }
 
         private void AllOff_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < listBox1.Items.Count; i++)
-                listBox1.SetSelected(i, false);
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                checkedListBox1.SetItemChecked(i, false);
             gbxCommand.Enabled = false;
+            SiteIndex = 65535;
         }
 
-        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            SiteIndex = 0;
             gbxCommand.Enabled = true;
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                if ( checkedListBox1.GetItemChecked(i))
+                {
+                    SiteIndex = SiteIndex + (int)Math.Pow(2, i);
+                }
+
+            }
         }
 
         private void ResetBoard_Click(object sender, EventArgs e)
@@ -204,9 +217,112 @@ namespace FTClient
 
         private void btnSetVcc_Click(object sender, EventArgs e)
         {
-            ClientSendMsg("testinit;", 0);
+            ClientSendMsg("set-vccvolt:" + nudSetVccVolt.Value + ";", 0);
             System.Threading.Thread.Sleep(10);
         }
 
+        private void btnSetVio_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-viovolt:" + nudSetVioVolt.Value + ";", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnSetClock_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-clock:" + nudSetClock.Value + ";", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnGetChipID_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("get-chipid;", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+
+        //need to be change to value by site setting
+        private void btnSetZone_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-zone:" + SiteIndex + ";", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnSetPattern_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-pattern:" + nudSetPattern.Value + ";", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnSetSample_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-sample:" + txtSetSample.Text + ";", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnSetBlockNum_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-blocknum:" + nudSetBlockNumLow.Value + "," + nudSetBlockNumHigh.Value + ";", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnSetEraseNum_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-erasenum:" + nudSetEraseNum.Value + ";", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnSetBlockMaxETime_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-blockmaxetime:" + nudSetMaxETime.Value + ";", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnSetAlg_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-alg:" + nudSetAlg.Value + ";", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnSet4Byte_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-4byte;", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnSetFast_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-fast;", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnSetFast1_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-fast1;", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-start;", 0);
+            System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnGetTestStart_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+
+            while ((strRecMsg != "ok:1") & ( i <= 9))
+            {
+                i++;
+                ClientSendMsg("set-teststat;", 0);
+                System.Threading.Thread.Sleep(10);
+            }
+        }
+
+        private void btnGetResult_Click(object sender, EventArgs e)
+        {
+            ClientSendMsg("set-result;", 0);
+            System.Threading.Thread.Sleep(10);
+        }
     }
 }

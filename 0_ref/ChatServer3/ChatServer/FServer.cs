@@ -37,7 +37,7 @@ namespace ChatServer
             IPAddress ipAddress = GetLocalIPv4Address();
             lblIP.Text = ipAddress.ToString();
             //给服务端赋予一个端口号
-            int port = 6666;
+            int port = 30;
             lblPort.Text = port.ToString();
 
             //将IP地址和端口号绑定到网络节点endpoint上 
@@ -100,6 +100,8 @@ namespace ChatServer
                 catch (Exception ex)
                 {
                     txtMsg.AppendText(ex.Message); //提示套接字监听异常
+                    lstClients.Items.Remove(clientName); //在客户端列表添加该访问客户端的唯一标识
+                    dicSocket.Remove(clientName); //将客户端名字和套接字添加到添加到数据字典中
                     break;
                 }
                 //获取访问客户端的IP

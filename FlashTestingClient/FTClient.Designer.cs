@@ -80,9 +80,11 @@
             this.btnTestInit = new System.Windows.Forms.Button();
             this.btnResetBoard = new System.Windows.Forms.Button();
             this.gbxSiteSelect = new System.Windows.Forms.GroupBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.btnAllOff = new System.Windows.Forms.Button();
             this.btnAllOn = new System.Windows.Forms.Button();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.btnClearLog = new System.Windows.Forms.Button();
+            this.btnSaveLog = new System.Windows.Forms.Button();
             this.gbxServerSetup.SuspendLayout();
             this.gbxCommand.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSetMaxETime)).BeginInit();
@@ -128,7 +130,7 @@
             this.txtMsg.Multiline = true;
             this.txtMsg.Name = "txtMsg";
             this.txtMsg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtMsg.Size = new System.Drawing.Size(900, 220);
+            this.txtMsg.Size = new System.Drawing.Size(710, 220);
             this.txtMsg.TabIndex = 37;
             // 
             // label1
@@ -750,26 +752,6 @@
             this.gbxSiteSelect.TabStop = false;
             this.gbxSiteSelect.Text = "Site Selector";
             // 
-            // btnAllOff
-            // 
-            this.btnAllOff.Location = new System.Drawing.Point(142, 215);
-            this.btnAllOff.Name = "btnAllOff";
-            this.btnAllOff.Size = new System.Drawing.Size(105, 30);
-            this.btnAllOff.TabIndex = 2;
-            this.btnAllOff.Text = "All Off";
-            this.btnAllOff.UseVisualStyleBackColor = true;
-            this.btnAllOff.Click += new System.EventHandler(this.AllOff_Click);
-            // 
-            // btnAllOn
-            // 
-            this.btnAllOn.Location = new System.Drawing.Point(20, 215);
-            this.btnAllOn.Name = "btnAllOn";
-            this.btnAllOn.Size = new System.Drawing.Size(100, 30);
-            this.btnAllOn.TabIndex = 1;
-            this.btnAllOn.Text = "All On";
-            this.btnAllOn.UseVisualStyleBackColor = true;
-            this.btnAllOn.Click += new System.EventHandler(this.AllOn_Click);
-            // 
             // checkedListBox1
             // 
             this.checkedListBox1.CheckOnClick = true;
@@ -799,6 +781,50 @@
             this.checkedListBox1.TabIndex = 3;
             this.checkedListBox1.SelectedIndexChanged += new System.EventHandler(this.checkedListBox1_SelectedIndexChanged);
             // 
+            // btnAllOff
+            // 
+            this.btnAllOff.Location = new System.Drawing.Point(142, 215);
+            this.btnAllOff.Name = "btnAllOff";
+            this.btnAllOff.Size = new System.Drawing.Size(105, 30);
+            this.btnAllOff.TabIndex = 2;
+            this.btnAllOff.Text = "All Off";
+            this.btnAllOff.UseVisualStyleBackColor = true;
+            this.btnAllOff.Click += new System.EventHandler(this.AllOff_Click);
+            // 
+            // btnAllOn
+            // 
+            this.btnAllOn.Location = new System.Drawing.Point(20, 215);
+            this.btnAllOn.Name = "btnAllOn";
+            this.btnAllOn.Size = new System.Drawing.Size(100, 30);
+            this.btnAllOn.TabIndex = 1;
+            this.btnAllOn.Text = "All On";
+            this.btnAllOn.UseVisualStyleBackColor = true;
+            this.btnAllOn.Click += new System.EventHandler(this.AllOn_Click);
+            // 
+            // btnClearLog
+            // 
+            this.btnClearLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearLog.Location = new System.Drawing.Point(820, 600);
+            this.btnClearLog.Margin = new System.Windows.Forms.Padding(5);
+            this.btnClearLog.Name = "btnClearLog";
+            this.btnClearLog.Size = new System.Drawing.Size(110, 30);
+            this.btnClearLog.TabIndex = 38;
+            this.btnClearLog.Text = "Clear Log";
+            this.btnClearLog.UseVisualStyleBackColor = true;
+            this.btnClearLog.Click += new System.EventHandler(this.btnClearLog_Click);
+            // 
+            // btnSaveLog
+            // 
+            this.btnSaveLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSaveLog.Location = new System.Drawing.Point(820, 700);
+            this.btnSaveLog.Margin = new System.Windows.Forms.Padding(5);
+            this.btnSaveLog.Name = "btnSaveLog";
+            this.btnSaveLog.Size = new System.Drawing.Size(110, 30);
+            this.btnSaveLog.TabIndex = 38;
+            this.btnSaveLog.Text = "Save Log";
+            this.btnSaveLog.UseVisualStyleBackColor = true;
+            this.btnSaveLog.Click += new System.EventHandler(this.btnSaveLog_Click);
+            // 
             // FTClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -808,6 +834,8 @@
             this.Controls.Add(this.gbxSiteSelect);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.gbxServerSetup);
+            this.Controls.Add(this.btnSaveLog);
+            this.Controls.Add(this.btnClearLog);
             this.Controls.Add(this.btnCSend);
             this.Controls.Add(this.txtCMsg);
             this.Controls.Add(this.labelManualCommand);
@@ -894,6 +922,8 @@
         private System.Windows.Forms.NumericUpDown nudSetPattern;
         private System.Windows.Forms.NumericUpDown nudSetBlockNumHigh;
         private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.Button btnClearLog;
+        private System.Windows.Forms.Button btnSaveLog;
     }
 }
 

@@ -34,6 +34,7 @@ namespace FTClient
         public const int ReceiveBufferSize = 8 * 1024;
         public string strRecMsg = null;
         public long SiteIndex = 0;
+        public int count = 0;
 
         private void btnConnectToServer_Click(object sender, EventArgs e)
         {
@@ -78,6 +79,7 @@ namespace FTClient
             gbxCommand.Enabled = false;
             txtCMsg.Enabled = false;
             btnCSend.Enabled = false;
+            //checkedListBox1.SetItemChecked = null;
             txtMsg.AppendText("Disconnected server...\r\n");
             socketClient.Close();
         }
@@ -131,12 +133,24 @@ namespace FTClient
         {
             byte[] arrClientMsg = Encoding.UTF8.GetBytes(sendMsg);
             socketClient.Send(arrClientMsg);
-            txtMsg.AppendText("Client:" + GetCurrentTime() + "\r\n" + sendMsg + "\r\n");
+            //txtMsg.AppendText("Client:" + GetCurrentTime() + "\r\n" + sendMsg + "\r\n");
 
+            ////if (sendMsg != "get-teststat;")
+            ////{
+            ////    count = 0;
+            ////    txtMsg.AppendText("Client send: " + sendMsg + "\r\n");
+            ////}
+            ////else
+            ////{
+            ////    count++;
+            ////}
+
+            ////if (count ==1)
+            txtMsg.AppendText("Client send: "  + sendMsg + "\r\n");
             ////实际发送的字节数组比实际输入的长度多1 用于存取标识符
             //byte[] arrClientSendMsg = new byte[arrClientMsg.Length + 1];
             //arrClientSendMsg[0] = symbol;  //在索引为0的位置上添加一个标识符
-            //Buffer.BlockCopy(arrClientMsg, 0, arrClientSendMsg, 1, arrClientMsg.Length);
+            //Buffer.BlockCopy(arrClientMsg, 0, arrClientSendMsg, 1, arrClientMsg.Length); 
             //socketClient.Send(arrClientSendMsg);
             //txtMsg.AppendText("Client:" + GetCurrentTime() + "\r\n" + sendMsg + "\r\n");
         }
@@ -303,7 +317,7 @@ namespace FTClient
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            ClientSendMsg("set-start;", 0);
+            ClientSendMsg("start;", 0);
             System.Threading.Thread.Sleep(10);
         }
 
@@ -311,18 +325,51 @@ namespace FTClient
         {
             int i = 0;
 
-            while ((strRecMsg != "ok:1") & ( i <= 9))
+            while ((strRecMsg != "ok:1") & ( i <= 30))
             {
                 i++;
-                ClientSendMsg("set-teststat;", 0);
-                System.Threading.Thread.Sleep(10);
+                ClientSendMsg("get-teststat;", 0);
+                System.Threading.Thread.Sleep(1000);
             }
         }
 
         private void btnGetResult_Click(object sender, EventArgs e)
         {
-            ClientSendMsg("set-result;", 0);
+            ClientSendMsg("get-result;", 0);
             System.Threading.Thread.Sleep(10);
+        }
+
+        private void btnClearLog_Click(object sender, EventArgs e)
+        {
+            txtMsg.Text = null;
+        }
+
+        private void btnSaveLog_Click(object sender, EventArgs e)
+        {
+            // Text from the rich textbox rtfMain
+            string str = txtMsg.Text;
+            // Create a new SaveFileDialog object
+            using (SaveFileDialog dlgSave = new SaveFileDialog())
+                try
+                {
+                    // Available file extensions
+                    dlgSave.Filter = "Text Files (*.txt)|*.txt";
+                    // SaveFileDialog title
+                    dlgSave.Title = "Save";
+                    // Show SaveFileDialog
+                    if (dlgSave.ShowDialog() == DialogResult.OK && dlgSave.FileName.Length > 0)
+                    {
+                        // Save file as utf8 without byte order mark (BOM)
+                        UTF8Encoding utf8 = new UTF8Encoding();
+                        StreamWriter sw = new StreamWriter(dlgSave.FileName, false, utf8);
+                        sw.Write(str);
+                        sw.Close();
+                    }
+                }
+                catch (Exception errorMsg)
+                {
+                    MessageBox.Show(errorMsg.Message);
+                } 
         }
     }
 }

@@ -15,13 +15,12 @@ namespace UserDefineSocket
         private static bool IsConnectionSuccessful = false;
         private static Exception socketexception;
         private static ManualResetEvent TimeoutObject = new ManualResetEvent(false);
-
-        public static TcpClient Connect(IPEndPoint remoteEndPoint, int timeoutMSec)
+        public TcpClient tcpclient = new TcpClient();
+        public TcpClient Connect(IPEndPoint remoteEndPoint, int timeoutMSec)
         {
             TimeoutObject.Reset();
             socketexception = null;
-
-            TcpClient tcpclient = new TcpClient();
+                        
             string serverip = Convert.ToString(remoteEndPoint.Address);
             int serverport = remoteEndPoint.Port;
             
@@ -44,6 +43,12 @@ namespace UserDefineSocket
                 tcpclient.Close();
                 throw new TimeoutException("TimeOut Exception");
             }
+        }
+
+        public void DisConnect()
+        {
+            socketexception = null;
+            tcpclient.Close();
         }
         private static void CallBackMethod(IAsyncResult asyncresult)
         {

@@ -25,6 +25,7 @@ namespace FTClient
             gbxCommand.Enabled = false;
             txtCMsg.Enabled = false;
             btnCSend.Enabled = false;
+            timer1.Start();
         }
         //创建 1个客户端套接字 和1个负责监听服务端请求的线程  
         Socket socketClient = null;
@@ -122,7 +123,9 @@ namespace FTClient
                 strRecMsg = Encoding.UTF8.GetString(buffer, 0, length);
 
                 //将文本框输入的信息附加到txtMsg中  并显示 谁,什么时间,换行,发送了什么信息 再换行
-                txtMsg.AppendText("Server " + GetCurrentTime() + " send:\r\n" + strRecMsg + "\r\n");
+                //txtMsg.AppendText("Server " + GetCurrentTime() + " send:\r\n" + strRecMsg + "\r\n");
+                //update on version 1.1
+                txtMsg.AppendText("Server send:" + "    " + strRecMsg + "\r\n");
             }
         }
 
@@ -146,7 +149,9 @@ namespace FTClient
             ////}
 
             ////if (count ==1)
-            txtMsg.AppendText("Client send: "  + sendMsg + "\r\n");
+            //update on version 1.1
+            //txtMsg.AppendText("Client send: "  + sendMsg + "\r\n");
+            txtMsg.AppendText("Client send: " + GetCurrentTime() + "    " + sendMsg + "\r\n");
             ////实际发送的字节数组比实际输入的长度多1 用于存取标识符
             //byte[] arrClientSendMsg = new byte[arrClientMsg.Length + 1];
             //arrClientSendMsg[0] = symbol;  //在索引为0的位置上添加一个标识符
@@ -213,7 +218,6 @@ namespace FTClient
                 {
                     SiteIndex = SiteIndex + (int)Math.Pow(2, i);
                 }
-
             }
         }
 
@@ -320,17 +324,25 @@ namespace FTClient
             ClientSendMsg("start;", 0);
             System.Threading.Thread.Sleep(10);
         }
-
+        //update on version 1.1
         private void btnGetTestStart_Click(object sender, EventArgs e)
         {
             int i = 0;
-
-            while ((strRecMsg != "ok:1") & ( i <= 30))
+            strRecMsg = null;
+            if (nudLoopCount.Value>1)
             {
-                i++;
-                ClientSendMsg("get-teststat;", 0);
-                System.Threading.Thread.Sleep(1000);
+                while ((strRecMsg != "ok:1") & (i < nudLoopCount.Value))
+                {
+                    i++;
+                    ClientSendMsg("get-teststat;", 0);
+                    System.Threading.Thread.Sleep(Int32.Parse(nudInterval.Value.ToString()));
+                }
             }
+            else
+            {
+                ClientSendMsg("get-teststat;", 0);
+            }
+
         }
 
         private void btnGetResult_Click(object sender, EventArgs e)
@@ -371,5 +383,10 @@ namespace FTClient
                     MessageBox.Show(errorMsg.Message);
                 } 
         }
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            tsslTime.Text = GetCurrentTime();
+        }
+
     }
 }

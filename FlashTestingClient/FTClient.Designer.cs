@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtCMsg = new System.Windows.Forms.TextBox();
             this.btnCSend = new System.Windows.Forms.Button();
             this.txtMsg = new System.Windows.Forms.TextBox();
@@ -41,6 +42,8 @@
             this.btnDisConnectToServer = new System.Windows.Forms.Button();
             this.labelManualCommand = new System.Windows.Forms.Label();
             this.gbxCommand = new System.Windows.Forms.GroupBox();
+            this.labelInterval = new System.Windows.Forms.Label();
+            this.labelLoopCount = new System.Windows.Forms.Label();
             this.chkSetFast1 = new System.Windows.Forms.CheckBox();
             this.chkSetFast = new System.Windows.Forms.CheckBox();
             this.chkSet4Byte = new System.Windows.Forms.CheckBox();
@@ -52,6 +55,8 @@
             this.chkSetClock = new System.Windows.Forms.CheckBox();
             this.nudSetMaxETime = new System.Windows.Forms.NumericUpDown();
             this.txtSetSample = new System.Windows.Forms.TextBox();
+            this.nudLoopCount = new System.Windows.Forms.NumericUpDown();
+            this.nudInterval = new System.Windows.Forms.NumericUpDown();
             this.nudSetAlg = new System.Windows.Forms.NumericUpDown();
             this.nudSetPattern = new System.Windows.Forms.NumericUpDown();
             this.nudSetBlockNumHigh = new System.Windows.Forms.NumericUpDown();
@@ -85,9 +90,16 @@
             this.btnAllOn = new System.Windows.Forms.Button();
             this.btnClearLog = new System.Windows.Forms.Button();
             this.btnSaveLog = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsslTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.gbxServerSetup.SuspendLayout();
             this.gbxCommand.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSetMaxETime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLoopCount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInterval)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSetAlg)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSetPattern)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSetBlockNumHigh)).BeginInit();
@@ -97,6 +109,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSetVioVolt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSetVccVolt)).BeginInit();
             this.gbxSiteSelect.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtCMsg
@@ -239,6 +252,8 @@
             // 
             // gbxCommand
             // 
+            this.gbxCommand.Controls.Add(this.labelInterval);
+            this.gbxCommand.Controls.Add(this.labelLoopCount);
             this.gbxCommand.Controls.Add(this.chkSetFast1);
             this.gbxCommand.Controls.Add(this.chkSetFast);
             this.gbxCommand.Controls.Add(this.chkSet4Byte);
@@ -250,6 +265,8 @@
             this.gbxCommand.Controls.Add(this.chkSetClock);
             this.gbxCommand.Controls.Add(this.nudSetMaxETime);
             this.gbxCommand.Controls.Add(this.txtSetSample);
+            this.gbxCommand.Controls.Add(this.nudLoopCount);
+            this.gbxCommand.Controls.Add(this.nudInterval);
             this.gbxCommand.Controls.Add(this.nudSetAlg);
             this.gbxCommand.Controls.Add(this.nudSetPattern);
             this.gbxCommand.Controls.Add(this.nudSetBlockNumHigh);
@@ -286,6 +303,24 @@
             this.gbxCommand.TabIndex = 51;
             this.gbxCommand.TabStop = false;
             this.gbxCommand.Text = "Command";
+            // 
+            // labelInterval
+            // 
+            this.labelInterval.AutoSize = true;
+            this.labelInterval.Location = new System.Drawing.Point(220, 290);
+            this.labelInterval.Name = "labelInterval";
+            this.labelInterval.Size = new System.Drawing.Size(63, 40);
+            this.labelInterval.TabIndex = 66;
+            this.labelInterval.Text = "Interval\r\n(ms)";
+            // 
+            // labelLoopCount
+            // 
+            this.labelLoopCount.AutoSize = true;
+            this.labelLoopCount.Location = new System.Drawing.Point(160, 291);
+            this.labelLoopCount.Name = "labelLoopCount";
+            this.labelLoopCount.Size = new System.Drawing.Size(53, 40);
+            this.labelLoopCount.TabIndex = 66;
+            this.labelLoopCount.Text = "Loop\r\nCount";
             // 
             // chkSetFast1
             // 
@@ -396,6 +431,55 @@
             this.txtSetSample.TabIndex = 40;
             this.txtSetSample.Text = "1,3,5,7,9,11,13,15,17,19,21";
             this.txtSetSample.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCMsg_KeyDown);
+            // 
+            // nudLoopCount
+            // 
+            this.nudLoopCount.Location = new System.Drawing.Point(165, 340);
+            this.nudLoopCount.Maximum = new decimal(new int[] {
+            99,
+            0,
+            0,
+            0});
+            this.nudLoopCount.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudLoopCount.Name = "nudLoopCount";
+            this.nudLoopCount.Size = new System.Drawing.Size(43, 27);
+            this.nudLoopCount.TabIndex = 64;
+            this.nudLoopCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // nudInterval
+            // 
+            this.nudInterval.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.nudInterval.Location = new System.Drawing.Point(220, 340);
+            this.nudInterval.Maximum = new decimal(new int[] {
+            9000,
+            0,
+            0,
+            0});
+            this.nudInterval.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.nudInterval.Name = "nudInterval";
+            this.nudInterval.Size = new System.Drawing.Size(64, 27);
+            this.nudInterval.TabIndex = 64;
+            this.nudInterval.Value = new decimal(new int[] {
+            3000,
+            0,
+            0,
+            0});
             // 
             // nudSetAlg
             // 
@@ -586,7 +670,7 @@
             // btnGetTestStart
             // 
             this.btnGetTestStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnGetTestStart.Location = new System.Drawing.Point(45, 360);
+            this.btnGetTestStart.Location = new System.Drawing.Point(45, 340);
             this.btnGetTestStart.Name = "btnGetTestStart";
             this.btnGetTestStart.Size = new System.Drawing.Size(110, 25);
             this.btnGetTestStart.TabIndex = 54;
@@ -597,7 +681,7 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(45, 320);
+            this.btnStart.Location = new System.Drawing.Point(45, 280);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(110, 25);
             this.btnStart.TabIndex = 53;
@@ -825,11 +909,50 @@
             this.btnSaveLog.UseVisualStyleBackColor = true;
             this.btnSaveLog.Click += new System.EventHandler(this.btnSaveLog_Click);
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslTime,
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel1});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 782);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(994, 25);
+            this.statusStrip1.TabIndex = 53;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // tsslTime
+            // 
+            this.tsslTime.Name = "tsslTime";
+            this.tsslTime.Size = new System.Drawing.Size(0, 20);
+            // 
+            // toolStripStatusLabel3
+            // 
+            this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+            this.toolStripStatusLabel3.Size = new System.Drawing.Size(561, 20);
+            this.toolStripStatusLabel3.Text = "                                                                                 " +
+    "                                                        |";
+            this.toolStripStatusLabel3.ToolTipText = "  ";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(136, 20);
+            this.toolStripStatusLabel1.Text = "Suppot By ManLink";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // FTClient
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(994, 807);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.gbxCommand);
             this.Controls.Add(this.gbxSiteSelect);
             this.Controls.Add(this.label1);
@@ -851,6 +974,8 @@
             this.gbxCommand.ResumeLayout(false);
             this.gbxCommand.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudSetMaxETime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudLoopCount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.nudInterval)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSetAlg)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSetPattern)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSetBlockNumHigh)).EndInit();
@@ -860,6 +985,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.nudSetVioVolt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSetVccVolt)).EndInit();
             this.gbxSiteSelect.ResumeLayout(false);
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -924,6 +1051,15 @@
         private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Button btnClearLog;
         private System.Windows.Forms.Button btnSaveLog;
+        private System.Windows.Forms.Label labelInterval;
+        private System.Windows.Forms.Label labelLoopCount;
+        private System.Windows.Forms.NumericUpDown nudInterval;
+        private System.Windows.Forms.NumericUpDown nudLoopCount;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel tsslTime;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

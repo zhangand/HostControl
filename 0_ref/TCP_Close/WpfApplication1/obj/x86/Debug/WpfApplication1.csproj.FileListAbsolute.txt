@@ -1,0 +1,12 @@
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.exe
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\bin\Debug\WpfApplication1.pdb
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\obj\x86\Debug\MainWindow.baml
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\obj\x86\Debug\MainWindow.g.cs
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\obj\x86\Debug\App.g.cs
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1_MarkupCompile.cache
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.g.resources
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.csproj.GenerateResource.Cache
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.exe
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\obj\x86\Debug\WpfApplication1.pdb
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\obj\x86\Debug\SocketBlockingInterrupt.Form1.resources
+C:\Users\Andy_Local\Documents\C#Project\0_HelloWorld\WpfApplication1\WpfApplication1\obj\x86\Debug\SocketBlockingInterrupt.Properties.Resources.resources
